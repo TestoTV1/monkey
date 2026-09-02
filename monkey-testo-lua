@@ -1,5 +1,5 @@
-local PotentHub = {}
-PotentHub.Toggles = {}
+local TestoHUB = {}
+TestoHUB.Toggles = {}
 
 local players = game:GetService("Players")
 local tweenService = game:GetService("TweenService")
@@ -45,12 +45,12 @@ if currentPlaceId ~= REQUIRED_PLACE_ID then
 end
 
 -- Cleanup previous instance if reinjected
-if hiddenUI:FindFirstChild("PotentHub") then
-	hiddenUI.PotentHub:Destroy()
+if hiddenUI:FindFirstChild("TestoHUB") then
+	hiddenUI.TestoHUB:Destroy()
 end
 
 local screenGui = Instance.new("ScreenGui")
-screenGui.Name = "PotentHub"
+screenGui.Name = "TestoHUB"
 screenGui.ResetOnSpawn = false
 screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 screenGui.DisplayOrder = 999
@@ -236,7 +236,7 @@ local title = Instance.new("TextLabel")
 title.Size = UDim2.new(0, 220, 1, 0)
 title.Position = UDim2.fromOffset(16, 0)
 title.BackgroundTransparency = 1
-title.Text = "PotentHub"
+title.Text = "TestoHUB"
 title.Font = Enum.Font.GothamBold
 title.TextSize = 15
 title.TextColor3 = COLOR_TEXT
@@ -393,7 +393,7 @@ local function selectTab(name)
 	end
 end
 
-function PotentHub:AddTab(name)
+function TestoHUB:AddTab(name)
 	local tabButton = Instance.new("TextButton")
 	tabButton.Name = name
 	tabButton.Size = UDim2.new(1, 0, 0, 34)
@@ -489,7 +489,7 @@ end
 -- AddToggle helper with subtitle support
 ----------------------------------------------------------------
 
-function PotentHub:AddToggle(parent, labelText, subtitleText, callback)
+function TestoHUB:AddToggle(parent, labelText, subtitleText, callback)
 	local frame = Instance.new("Frame")
 	frame.Size = UDim2.new(1, 0, 0, 52)
 	frame.BackgroundColor3 = COLOR_BG_LIGHT
@@ -564,7 +564,7 @@ function PotentHub:AddToggle(parent, labelText, subtitleText, callback)
 		end
 	end)
 
-	PotentHub.Toggles[labelText] = toggleData
+	TestoHUB.Toggles[labelText] = toggleData
 	return toggleData
 end
 
@@ -605,8 +605,8 @@ end)
 -- Disable all + Destroy GUI
 ----------------------------------------------------------------
 
-function PotentHub:DisableAll()
-	for _, toggleData in pairs(PotentHub.Toggles) do
+function TestoHUB:DisableAll()
+	for _, toggleData in pairs(TestoHUB.Toggles) do
 		if toggleData.Value then
 			toggleData.Value = false
 		end
@@ -627,32 +627,32 @@ destroyButton.MouseButton1Down:Connect(function()
 	closeButton.Active = false
 
 	pcall(function()
-		PotentHub:DisableAll()
+		TestoHUB:DisableAll()
 	end)
 
-	if PotentHub.OnDestroy then
-		pcall(PotentHub.OnDestroy)
+	if TestoHUB.OnDestroy then
+		pcall(TestoHUB.OnDestroy)
 	end
 
 	screenGui:Destroy()
 
-	if getgenv().PotentHub == PotentHub then
-		getgenv().PotentHub = nil
+	if getgenv().TestoHUB == TestoHUB then
+		getgenv().TestoHUB = nil
 	end
 
-	table.clear(PotentHub)
+	table.clear(TestoHUB)
 end)
 
 ----------------------------------------------------------------
 -- Create tabs
 ----------------------------------------------------------------
 
-local world1 = PotentHub:AddTab("WORLD 1")
-local world2 = PotentHub:AddTab("WORLD 2")
-local world3 = PotentHub:AddTab("WORLD 3")
-local world4 = PotentHub:AddTab("WORLD 4")
-local world5 = PotentHub:AddTab("WORLD 5")
-local adminAbuse = PotentHub:AddTab("ADMIN ABUSE")
+local world1 = TestoHUB:AddTab("WORLD 1")
+local world2 = TestoHUB:AddTab("WORLD 2")
+local world3 = TestoHUB:AddTab("WORLD 3")
+local world4 = TestoHUB:AddTab("WORLD 4")
+local world5 = TestoHUB:AddTab("WORLD 5")
+local adminAbuse = TestoHUB:AddTab("ADMIN ABUSE")
 
 ----------------------------------------------------------------
 -- Shared functions
@@ -739,7 +739,7 @@ local function stopAutoTeleport1()
 	end
 end
 
-PotentHub:AddToggle(world1, "AUTO TELEPORT WORLD 1", "", function(state)
+TestoHUB:AddToggle(world1, "AUTO TELEPORT WORLD 1", "", function(state)
 	autoTeleportActive1 = state
 	if state then
 		startAutoTeleport1()
@@ -780,7 +780,7 @@ local function stopVipTeleport1()
 	end
 end
 
-PotentHub:AddToggle(world1, "AUTO TELEPORT VIP ONLY", "", function(state)
+TestoHUB:AddToggle(world1, "AUTO TELEPORT VIP ONLY", "", function(state)
 	vipTeleportActive1 = state
 	if state then
 		startVipTeleport1()
@@ -835,7 +835,7 @@ local function stopShardCollect1()
 	shardIndex1 = 1
 end
 
-PotentHub:AddToggle(world1, "AUTO COLLECT SHARDS", "", function(state)
+TestoHUB:AddToggle(world1, "AUTO COLLECT SHARDS", "", function(state)
 	shardCollectActive1 = state
 	if state then
 		startShardCollect1()
@@ -879,7 +879,7 @@ local function stopAutoTeleport2()
 	end
 end
 
-PotentHub:AddToggle(world2, "AUTO TELEPORT WORLD 2", "", function(state)
+TestoHUB:AddToggle(world2, "AUTO TELEPORT WORLD 2", "", function(state)
 	autoTeleportActive2 = state
 	if state then
 		startAutoTeleport2()
@@ -920,7 +920,7 @@ local function stopVipTeleport2()
 	end
 end
 
-PotentHub:AddToggle(world2, "AUTO TELEPORT VIP ONLY", "", function(state)
+TestoHUB:AddToggle(world2, "AUTO TELEPORT VIP ONLY", "", function(state)
 	vipTeleportActive2 = state
 	if state then
 		startVipTeleport2()
@@ -975,7 +975,7 @@ local function stopShardCollect2()
 	shardIndex2 = 1
 end
 
-PotentHub:AddToggle(world2, "AUTO COLLECT SHARDS", "", function(state)
+TestoHUB:AddToggle(world2, "AUTO COLLECT SHARDS", "", function(state)
 	shardCollectActive2 = state
 	if state then
 		startShardCollect2()
@@ -1019,7 +1019,7 @@ local function stopAutoTeleport3()
 	end
 end
 
-PotentHub:AddToggle(world3, "AUTO TELEPORT WORLD 3", "", function(state)
+TestoHUB:AddToggle(world3, "AUTO TELEPORT WORLD 3", "", function(state)
 	autoTeleportActive3 = state
 	if state then
 		startAutoTeleport3()
@@ -1060,7 +1060,7 @@ local function stopVipTeleport3()
 	end
 end
 
-PotentHub:AddToggle(world3, "AUTO TELEPORT VIP ONLY", "", function(state)
+TestoHUB:AddToggle(world3, "AUTO TELEPORT VIP ONLY", "", function(state)
 	vipTeleportActive3 = state
 	if state then
 		startVipTeleport3()
@@ -1115,7 +1115,7 @@ local function stopShardCollect3()
 	shardIndex3 = 1
 end
 
-PotentHub:AddToggle(world3, "AUTO COLLECT SHARDS", "", function(state)
+TestoHUB:AddToggle(world3, "AUTO COLLECT SHARDS", "", function(state)
 	shardCollectActive3 = state
 	if state then
 		startShardCollect3()
@@ -1159,7 +1159,7 @@ local function stopAutoTeleport4()
 	end
 end
 
-PotentHub:AddToggle(world4, "AUTO TELEPORT WORLD 4", "", function(state)
+TestoHUB:AddToggle(world4, "AUTO TELEPORT WORLD 4", "", function(state)
 	autoTeleportActive4 = state
 	if state then
 		startAutoTeleport4()
@@ -1200,7 +1200,7 @@ local function stopVipTeleport4()
 	end
 end
 
-PotentHub:AddToggle(world4, "AUTO TELEPORT VIP ONLY", "", function(state)
+TestoHUB:AddToggle(world4, "AUTO TELEPORT VIP ONLY", "", function(state)
 	vipTeleportActive4 = state
 	if state then
 		startVipTeleport4()
@@ -1255,7 +1255,7 @@ local function stopShardCollect4()
 	shardIndex4 = 1
 end
 
-PotentHub:AddToggle(world4, "AUTO COLLECT SHARDS", "", function(state)
+TestoHUB:AddToggle(world4, "AUTO COLLECT SHARDS", "", function(state)
 	shardCollectActive4 = state
 	if state then
 		startShardCollect4()
@@ -1299,7 +1299,7 @@ local function stopAutoTeleport5()
 	end
 end
 
-PotentHub:AddToggle(world5, "AUTO TELEPORT WORLD 5", "", function(state)
+TestoHUB:AddToggle(world5, "AUTO TELEPORT WORLD 5", "", function(state)
 	autoTeleportActive5 = state
 	if state then
 		startAutoTeleport5()
@@ -1340,7 +1340,7 @@ local function stopVipTeleport5()
 	end
 end
 
-PotentHub:AddToggle(world5, "AUTO TELEPORT VIP ONLY", "", function(state)
+TestoHUB:AddToggle(world5, "AUTO TELEPORT VIP ONLY", "", function(state)
 	vipTeleportActive5 = state
 	if state then
 		startVipTeleport5()
@@ -1395,7 +1395,7 @@ local function stopShardCollect5()
 	shardIndex5 = 1
 end
 
-PotentHub:AddToggle(world5, "AUTO COLLECT SHARDS", "", function(state)
+TestoHUB:AddToggle(world5, "AUTO COLLECT SHARDS", "", function(state)
 	shardCollectActive5 = state
 	if state then
 		startShardCollect5()
@@ -1490,7 +1490,7 @@ local function stopLuckyBlockTeleport()
 	luckyBlockIndex = 1
 end
 
-PotentHub:AddToggle(adminAbuse, "AUTO TELEPORT LUCKY BLOCK", "SOLO USAR EN ADMIN ABUSE", function(state)
+TestoHUB:AddToggle(adminAbuse, "AUTO TELEPORT LUCKY BLOCK", "SOLO USAR EN ADMIN ABUSE", function(state)
 	luckyBlockTeleportActive = state
 	if state then
 		startLuckyBlockTeleport()
@@ -1576,7 +1576,7 @@ local function stopBananaTeleport()
 	bananaIndex = 1
 end
 
-PotentHub:AddToggle(adminAbuse, "AUTO TELEPORT BANANAS", "SOLO USAR EN ADMIN ABUSE", function(state)
+TestoHUB:AddToggle(adminAbuse, "AUTO TELEPORT BANANAS", "SOLO USAR EN ADMIN ABUSE", function(state)
 	bananaTeleportActive = state
 	if state then
 		startBananaTeleport()
@@ -1668,7 +1668,7 @@ local function stopTacoTeleport()
 	tacoIndex = 1
 end
 
-PotentHub:AddToggle(adminAbuse, "AUTO TELEPORT TACOS", "Teletransporta a todos los Tacos", function(state)
+TestoHUB:AddToggle(adminAbuse, "AUTO TELEPORT TACOS", "Teletransporta a todos los Tacos", function(state)
 	tacoTeleportActive = state
 	if state then
 		startTacoTeleport()
@@ -1677,6 +1677,6 @@ PotentHub:AddToggle(adminAbuse, "AUTO TELEPORT TACOS", "Teletransporta a todos l
 	end
 end)
 
-getgenv().PotentHub = PotentHub
+getgenv().TestoHUB = TestoHUB
 
-return PotentHub
+return TestoHUB
